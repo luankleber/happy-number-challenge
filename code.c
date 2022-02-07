@@ -1,30 +1,58 @@
+// Luan Kleber da Silva Pereira
+// Happy Number Challenge
+
 #include <stdio.h>
-#include <math.h>
+
+int isInTheLoop(int sum)
+{
+    if (sum == 4 || sum == 16 || sum == 37 || sum == 58 || sum == 89 || sum == 145 || sum == 42 || sum == 20)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int equationProcess(int input)
+{
+    int holder = 0;
+    int sum = 0;
+
+    while (input > 0)
+    {
+        holder = input % 10;
+        printf("%d", holder);
+        printf("²");
+        sum += (holder * holder);
+        input = input / 10;
+
+        if (input > 0)
+        {
+            printf("+");
+        }
+    }
+    return sum;
+}
+
+int getInput()
+{
+    int input;
+    do
+    {
+        printf("Input: n = ");
+        scanf("%d", &input);
+    } while (input <= 0);
+}
 
 int main(int argc, char const *argv[])
 {
-    int input, holder, sum = 0;
+    int input = getInput();
+    int sum = 0;
 
-    printf("Input: n = ");
-    scanf("%d", &input);
     printf("Process:\n");
 
-    while (sum != 1 && sum != 4)
+    while (sum != 1 && 1 != isInTheLoop(sum))
     {
-        sum = 0;
-        while (input > 0)
-        {
-            holder = input % 10;
-            printf("%d", holder);
-            printf("²");
-            sum = sum + pow(holder, 2);
-            input = input / 10;
-
-            if (input > 0)
-            {
-                printf("+");
-            }
-        }
+        sum = equationProcess(input);
         input = sum;
         printf("= %d\n", sum);
     }
